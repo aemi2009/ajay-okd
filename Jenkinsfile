@@ -1,8 +1,8 @@
 pipeline {
     agent any
     environment {
-        PATH = "/usr/local/bin:$PATH"  // Add Docker path
-        PATH = "/opt/homebrew/bin:$PATH"  // Add oc path
+        // Add Docker and oc paths
+        PATH = "/usr/local/bin:/opt/homebrew/bin:$PATH"
     }
     stages {
         stage('SCM') {
@@ -13,11 +13,12 @@ pipeline {
                 }
             }
         }
-       stage('Build') {
+        stage('Build') {
             steps {
                 script {
                     try {
-                        sh 'docker build -t ajayokd:latest .'  // Build Docker image
+                        // Build Docker image
+                        sh 'docker build -t ajayokd:latest .'
                     } catch (Exception e) {
                         echo "Build failed: ${e.getMessage()}"
                         currentBuild.result = 'FAILURE'
@@ -26,7 +27,6 @@ pipeline {
                 }
             }
         }
-
         stage('Deploy to OpenShift') {
             steps {
                 script {
@@ -46,7 +46,6 @@ pipeline {
             }
         }
     }
-
     post {
         success {
             echo 'Build and deployment successful!'
