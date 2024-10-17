@@ -1,9 +1,6 @@
 # Use AlmaLinux as the base image
 FROM almalinux:latest
 
-# Install Nginx as root
-USER root
-
 # Install Nginx and clean up package manager caches to keep the image small
 RUN dnf -y install nginx && \
     dnf clean all
