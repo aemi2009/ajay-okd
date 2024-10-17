@@ -1,5 +1,11 @@
-# Use the official Nginx image as the base image
-FROM nginx:alpine
+# Use AlmaLinux as the base image
+FROM almalinux:latest
+
+USER root
+
+# Install Nginx
+RUN dnf -y install nginx && \
+    dnf clean all
 
 # Copy the HTML file to the Nginx default location
 COPY ./ajayokd.html /usr/share/nginx/html/ajayokd.html
