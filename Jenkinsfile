@@ -2,6 +2,7 @@ pipeline {
     agent any
     environment {
         PATH = "/usr/local/bin:$PATH"  // Add Docker path
+        PATH = "/opt/homebrew/bin:$PATH"  // Add oc path
     }
     stages {
         stage('SCM') {
