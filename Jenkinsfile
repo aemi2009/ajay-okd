@@ -10,12 +10,11 @@ pipeline {
                 }
             }
         }
-        stage('Build') {
+       stage('Build') {
             steps {
                 script {
-                    // Run the build command
                     try {
-                        sh 'make build'  // Assuming you have a Makefile for building your application
+                        sh 'docker build -t ajayokd:latest .'  // Build Docker image
                     } catch (Exception e) {
                         echo "Build failed: ${e.getMessage()}"
                         currentBuild.result = 'FAILURE'
@@ -24,6 +23,7 @@ pipeline {
                 }
             }
         }
+
         stage('Deploy to OpenShift') {
             steps {
                 script {
