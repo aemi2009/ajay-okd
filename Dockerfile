@@ -1,6 +1,9 @@
 # Use AlmaLinux as the base image
 FROM almalinux:latest
 
+# Install Nginx as root
+USER root
+
 # Install Nginx and clean up package manager caches to keep the image small
 RUN dnf -y install nginx && \
     dnf clean all
@@ -13,7 +16,7 @@ RUN mkdir -p /var/cache/nginx /run /var/log/nginx && \
 COPY ./ajayokd.html /usr/share/nginx/html/ajayokd.html
 
 # Expose port 80
-EXPOSE 80
+EXPOSE 8080
 
 # Start Nginx as root
 CMD ["nginx", "-g", "daemon off;"]
