@@ -4,8 +4,7 @@ pipeline {
     stages {
         stage('Clone') {
             steps {
-                // Clone the repository from Git
-                git url: 'https://github.com/aemi2009/ajay-okd.git', branch: 'main'
+                git credentialsId: 'github-credentials', url: 'https://github.com/aemi2009/ajay-okd.git', branch: 'master'
             }
         }
 
