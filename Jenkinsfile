@@ -2,15 +2,14 @@ pipeline {
     agent any
 
     stages {
-        stage('Clone') {
+        stage('SCM') {
             steps {
                 script {
-                    // Clone the repository
-                    git credentialsId: 'github-credentials', url: 'https://github.com/aemi2009/ajay-okd.git', branch: 'master'
+                    // Clone the repository                    
+                    git credentialsId: 'github-credentials', url: 'https://github.com/aemi2009/ajay-okd.git'
                 }
             }
         }
-
         stage('Build') {
             steps {
                 script {
@@ -25,7 +24,6 @@ pipeline {
                 }
             }
         }
-
         stage('Deploy to OpenShift') {
             steps {
                 script {
